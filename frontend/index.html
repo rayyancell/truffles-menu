@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Truffles | Menu</title>
+  <meta name="description" content="Truffles — Premium dining, handcrafted dishes, unforgettable flavors.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- ─── Top Navigation Bar ─── -->
+    <header class="topbar" id="topbar">
+      <div class="topbar-brand">MENU</div>
+      <div class="topbar-actions">
+        <button class="topbar-icon" id="currencyToggle" title="Currency">
+          <span class="material-icons-round">attach_money</span>
+        </button>
+        <button class="topbar-icon" id="themeToggle" title="Toggle Theme">
+          <span class="material-icons-round">dark_mode</span>
+        </button>
+        <button class="topbar-icon" id="trackOpenBtn" title="Track Order">
+          <span class="material-icons-round">search</span>
+        </button>
+        <button class="topbar-icon" title="Language" id="langToggle">
+          <span class="lang-badge" id="langBadge">EN</span>
+        </button>
+        <button class="topbar-icon cart-icon" title="Cart" id="cartBtn">
+          <span class="material-icons-round">shopping_bag</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ─── Hero / Greeting ─── -->
+    <section class="hero">
+      <p class="greeting" id="greeting">Good Evening</p>
+      <h1 class="restaurant-name">TRUFFLES</h1>
+      <div class="hero-divider">
+        <span class="divider-line"></span>
+        <span class="divider-diamond">◆</span>
+        <span class="divider-line"></span>
+      </div>
+      <p class="restaurant-tagline">The Golden Oak Experience</p>
+    </section>
+
+    <!-- ─── Featured Banner (Chef's Special) ─── -->
+    <section class="banner-section" id="chefSpecialSection" style="display: none; transition: opacity 0.5s ease-in-out;">
+      <div class="chef-special-slider" id="chefSpecialSlider">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ─── Categories ─── -->
+    <section class="categories-section">
+      <div class="section-header">
+        <h2 class="section-title">CATEGORIES</h2>
+        <span class="swipe-hint">Swipe List <span class="hint-arrows">↔</span></span>
+      </div>
+      <div class="categories-scroll" id="categoriesScroll">
+        <button class="cat-card active" data-cat="all">
+          <div class="cat-icon-wrap"><span class="material-icons-round">restaurant_menu</span></div>
+          <span class="cat-label">ALL</span>
+        </button>
+        <button class="cat-card" data-cat="starters">
+          <div class="cat-icon-wrap"><span class="material-icons-round">restaurant</span></div>
+          <span class="cat-label">STARTERS</span>
+        </button>
+        <button class="cat-card" data-cat="mains">
+          <div class="cat-icon-wrap"><span class="material-icons-round">lunch_dining</span></div>
+          <span class="cat-label">MAINS</span>
+        </button>
+        <button class="cat-card" data-cat="pizza">
+          <div class="cat-icon-wrap"><span class="material-icons-round">local_pizza</span></div>
+          <span class="cat-label">PIZZA</span>
+        </button>
+        <button class="cat-card" data-cat="desserts">
+          <div class="cat-icon-wrap"><span class="material-icons-round">icecream</span></div>
+          <span class="cat-label">DESSERTS</span>
+        </button>
+        <button class="cat-card" data-cat="drinks">
+          <div class="cat-icon-wrap"><span class="material-icons-round">local_bar</span></div>
+          <span class="cat-label">DRINKS</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── Search ─── -->
+    <section class="search-section">
+      <div class="search-bar" id="searchBar">
+        <span class="material-icons-round search-icon">search</span>
+        <input type="text" id="searchInput" placeholder="Search dishes..." autocomplete="off">
+        <button class="search-clear hidden" id="searchClear"><span class="material-icons-round">close</span></button>
+      </div>
+    </section>
+
+    <!-- ─── Filter & View Toggle ─── -->
+    <section class="filter-section">
+      <div class="filter-left">
+        <h2 class="filter-title" id="filterTitle">All Dishes</h2>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all"><span class="pill-ring all-ring"></span> All</button>
+          <button class="pill" data-filter="veg"><span class="pill-dot veg-dot"></span> Veg</button>
+          <button class="pill" data-filter="non-veg"><span class="pill-dot nonveg-dot"></span> Non</button>
+        </div>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" data-view="list" title="List View"><span class="material-icons-round">view_list</span></button>
+        <button class="view-btn" data-view="grid" title="Grid View"><span class="material-icons-round">grid_view</span></button>
+      </div>
+    </section>
+
+    <!-- ─── Dishes ─── -->
+    <section class="dishes-section">
+      <div class="dishes-container" id="dishesContainer"></div>
+    </section>
+
+    <!-- ─── Cart Drawer ─── -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-drawer-header">
+        <h3>Your Order</h3>
+        <button class="cart-drawer-close" id="cartClose"><span class="material-icons-round">close</span></button>
+      </div>
+      <div class="cart-drawer-body" id="cartBody"></div>
+      <div class="cart-drawer-footer" id="cartFooter" style="display:none;">
+        <div class="cart-total"><span>Total</span><span id="cartTotal">Rs. 0</span></div>
+        <button class="checkout-btn" id="checkoutBtn"><span>Checkout</span> <span class="material-icons-round">arrow_forward</span></button>
+      </div>
+    </div>
+
+    <!-- ─── Floating Action Button ─── -->
+    <button class="fab" id="fab"><span class="material-icons-round">shopping_cart</span><span class="fab-badge" id="fabBadge"></span></button>
+
+    <!-- ─── Toast ─── -->
+    <div class="toast" id="toast"><span class="material-icons-round toast-icon">check_circle</span><span class="toast-msg" id="toastMsg">Added to cart</span></div>
+
+    <!-- ─── Product Details View Overlay ─── -->
+    <div class="product-view" id="productView">
+      <div class="prod-header">
+        <button class="prod-icon-btn" id="prodBackBtn"><span class="material-icons-round">arrow_back</span></button>
+        <div class="prod-brand">THE GOLDEN OAK</div>
+        <button class="prod-icon-btn" id="prodCartBtn"><span class="material-icons-round">shopping_bag</span><span class="cart-count" id="prodCartCount">0</span></button>
+      </div>
+      <div class="prod-image-section">
+        <div class="prod-image-wrapper"><img src="" alt="" id="prodImage"></div>
+      </div>
+      <div class="prod-details">
+        <h2 class="prod-title"><span id="prodTitle"></span> <span class="dish-type-icon" id="prodTypeIcon"></span></h2>
+        <div class="prod-meta">
+          <span class="prod-price"><span class="currency-sign">Rs. </span><span id="prodPrice"></span></span>
+          <span class="prod-calories" id="prodCalories"></span>
+        </div>
+        <div class="prod-ingredients" id="prodIngredients"></div>
+      </div>
+      <div class="prod-actions">
+        <button class="prod-add-btn" id="prodAddOrderBtn">ADD TO ORDER</button>
+      </div>
+    </div>
+
+  </div> <!-- End App -->
+
+  <!-- ─── Modals (Fixed Root Placement) ─── -->
+  
+  <div class="confirm-overlay" id="confirmOverlay"></div>
+  <div class="confirm-sheet" id="confirmSheet">
+    <h3 class="confirm-title">Confirm Order</h3>
+    <div class="quantity-selector">
+      <button class="qty-btn" id="qtyMinus"><span class="material-icons-round">remove</span></button>
+      <span class="qty-count" id="qtyCount">1</span>
+      <button class="qty-btn" id="qtyPlus"><span class="material-icons-round">add</span></button>
+    </div>
+    <div class="confirm-summary">
+      <div class="summary-text"><p class="summary-label">Total Amount</p></div>
+      <div class="summary-price" id="confirmPrice">Rs. 0</div>
+    </div>
+    <button class="confirm-add-btn" id="confirmAddBtn">ADD TO CART</button>
+  </div>
+
+  <div class="confirm-overlay" id="langOverlay" style="z-index:3000"></div>
+  <div class="confirm-sheet" id="langSheet" style="z-index:3001">
+    <h3 class="confirm-title">Select Language</h3>
+    <div class="lang-list">
+      <button class="lang-option" data-lang="en"><span class="lang-flag">🇺🇸</span> English</button>
+      <button class="lang-option" data-lang="ur"><span class="lang-flag">🇵🇰</span> اردو</button>
+    </div>
+    <button class="confirm-add-btn" id="langCloseBtn">CLOSE</button>
+  </div>
+
+  <div class="confirm-overlay" id="checkoutOverlay" style="z-index:2500"></div>
+  <div class="confirm-sheet" id="checkoutSheet" style="z-index:2501">
+    <div id="checkoutStep1">
+      <h3 class="confirm-title">Order Summary</h3>
+      <div id="checkoutSummaryList" style="margin:15px 0; border:1px solid var(--border); border-radius:12px; padding:12px; max-height:180px; overflow-y:auto; background:rgba(255,255,255,0.03)"></div>
+      <div style="border-top:1px solid var(--border); padding-top:10px; margin-top:5px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem; color:var(--text-secondary);"><span>Subtotal</span><span id="checkoutSubtotal">Rs. 0</span></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.85rem; color:var(--text-secondary);"><span>Tax</span><span id="checkoutTaxAmount">Rs. 0</span></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; font-size:1.1rem; color:var(--gold);"><span>Total</span><span id="checkoutTotalAmount">Rs. 0</span></div>
+      </div>
+      <button class="confirm-add-btn" id="nextToDetailsBtn">CONTINUE</button>
+      <button id="cancelCheckoutBtn" style="background:none; border:none; color:var(--text-secondary); width:100%; margin-top:10px; cursor:pointer">CANCEL</button>
+    </div>
+    <div id="checkoutStep2" style="display:none">
+      <h3 class="confirm-title">Customer Details</h3>
+      <input type="text" id="customerName" placeholder="Name" style="width:100%; padding:12px; margin-top:10px; border-radius:8px; background:var(--bg-card); color:white; border:1px solid var(--border)">
+      <input type="tel" id="customerPhone" placeholder="Phone Number (e.g. 0300...)" style="width:100%; padding:12px; margin-top:10px; border-radius:8px; background:var(--bg-card); color:white; border:1px solid var(--border)">
+      <input type="number" id="tableNumber" placeholder="Table #" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; background:var(--bg-card); color:white; border:1px solid var(--border)">
+      <button class="confirm-add-btn" id="finishOrderBtn">PLACE ORDER</button>
+      <button id="backToSummaryBtn" style="background:none; border:none; color:var(--text-secondary); width:100%; margin-top:10px; cursor:pointer">Back</button>
+    </div>
+    <div id="checkoutStep3" style="display:none; text-align:center">
+      <h3 style="color:var(--gold)">Order Placed Successfully!</h3>
+      <div style="margin:15px 0; padding:15px; border:1px dashed var(--gold); border-radius:12px; background:var(--gold-subtle)">
+        <p style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Order Number</p>
+        <h2 id="orderIdDisplay" style="color:var(--gold); font-size:2rem; margin:5px 0;">#0000</h2>
+        <p style="font-size:0.7rem; color:var(--text-secondary);">Save this number to track your order later.</p>
+      </div>
+      <div id="orderStatusDisplay" style="margin:10px 0; font-size:1.5rem; font-weight:bold; color:var(--gold)">PENDING</div>
+      <button class="confirm-add-btn" id="closeSucessBtn">DONE</button>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Track Order Sheet -->
+  <div class="confirm-overlay" id="trackOverlay" style="z-index:2600"></div>
+  <div class="confirm-sheet" id="trackSheet" style="z-index:2601; min-height:400px;">
+    <h3 class="confirm-title">Track Your Order</h3>
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <input type="text" id="trackInput" placeholder="Enter Order Number (e.g. #1234)" style="flex:1; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:15px; color:white; outline:none;">
+      <button id="trackSearchBtn" style="background:var(--gold); border:none; border-radius:12px; width:50px; cursor:pointer;"><span class="material-icons-round" style="color:var(--bg-primary)">search</span></button>
+    </div>
+    
+    <div id="trackResult" style="display:none; margin-top:25px; border-top:1px solid var(--border); padding-top:20px;">
+       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+         <div>
+            <h4 id="resName" style="color:white; font-size:1.1rem;">Customer Name</h4>
+            <div id="resMeta" style="color:var(--text-secondary); font-size:0.75rem; margin-top:4px;">Table #5 • 0300...</div>
+         </div>
+         <div style="text-align:right;">
+           <span id="resType" class="status-badge" style="padding:4px 8px; border-radius:6px; font-size:0.7rem; margin-bottom:5px; display:block;">DINING</span>
+           <span id="resStatus" class="status-badge-pending" style="padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:700;">PENDING</span>
+         </div>
+       </div>
+       <div id="resItems" style="max-height:150px; overflow-y:auto; font-size:0.85rem; color:var(--text-secondary); margin-bottom:15px; padding:10px; background:var(--bg-primary); border-radius:10px;"></div>
+       <div style="display:flex; justify-content:space-between; font-weight:bold; border-top:1px solid var(--border); padding-top:10px;">
+         <span>Total Paid</span>
+         <span id="resTotal" style="color:var(--gold)">Rs. 0</span>
+       </div>
+    </div>
+    
+    <div id="trackEmpty" style="display:none; text-align:center; margin-top:40px; color:var(--text-muted);">
+      <span class="material-icons-round" style="font-size:48px;">sentiment_very_dissatisfied</span>
+      <p style="margin-top:10px;">Order not found. Please check the number.</p>
+    </div>
+
+    <button class="confirm-add-btn" id="trackCloseBtn" style="margin-top:auto;">CLOSE</button>
+  </div>
+
+  <script src="script.js?v=6"></script>
+</body>
+</html>

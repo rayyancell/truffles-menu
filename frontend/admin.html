@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truffles | Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #151515;
+      --gold: #d4af37;
+      --text-primary: #f0ece4;
+      --text-secondary: rgba(240, 236, 228, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius-md: 16px;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ─── Sidebar ─── */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .brand {
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 4px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .nav-item {
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .nav-item:hover, .nav-item.active { background: var(--bg-card); color: var(--gold); }
+    .nav-item .material-icons-round { font-size: 20px; }
+
+    /* ─── Main Content ─── */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gold);
+      color: var(--bg-primary);
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+
+    /* ─── Table ─── */
+    .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { padding: 18px 24px; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    td { padding: 18px 24px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+
+    .dish-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+    .action-btns { display: flex; gap: 10px; }
+    .icon-btn { cursor: pointer; color: var(--text-secondary); border: none; background: transparent; transition: 0.2s; }
+    .icon-btn:hover { color: var(--gold); }
+    .delete-btn:hover { color: #f87171; }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+      display: none; align-items: center; justify-content: center; z-index: 1000;
+    }
+    .modal {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md);
+      width: 500px; padding: 30px; position: relative;
+    }
+    .modal-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .close-modal { cursor: pointer; color: var(--text-secondary); }
+
+    form { display: flex; flex-direction: column; gap: 15px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.8rem; color: var(--text-secondary); }
+    input, select, textarea {
+      background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px; color: var(--text-primary); outline: none; transition: 0.2s;
+    }
+    input:focus { border-color: var(--gold); }
+
+    .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+    .status-pending { background: rgba(212, 175, 55, 0.15); color: var(--gold); }
+    .status-completed { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+
+    @keyframes fadeInHighlight {
+      0% { background: rgba(212, 175, 55, 0.3); transform: scale(1.02); }
+      100% { background: transparent; transform: scale(1); }
+    }
+    .new-order-highlight {
+      animation: fadeInHighlight 2s ease-out;
+    }
+    .order-removed {
+      animation: fadeOutRemove 0.5s forwards;
+    }
+    @keyframes fadeOutRemove {
+      to { transform: translateX(50px); opacity: 0; }
+    }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: #ef4444;
+      cursor: pointer;
+    }
+    .btn-danger:hover {
+      background: #ef4444;
+      color: white;
+    }
+    .btn-danger:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Toggle Switch */
+    .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background-color: var(--bg-secondary); border: 1px solid var(--border); transition: .4s; border-radius: 34px; }
+    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: var(--text-secondary); transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: rgba(212, 175, 55, 0.2); border-color: var(--gold); }
+    input:checked + .slider:before { transform: translateX(22px); background-color: var(--gold); }
+
+    /* ─── Professional Thermal Receipt Design (80mm) ─── */
+    #receipt-preview-modal {
+      display: none;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+      align-items: center; justify-content: center; z-index: 5000;
+    }
+    #receipt-preview-modal.show { display: flex; }
+
+    .preview-modal-content {
+      background: #fdfdfd; color: #000; width: 85mm; padding: 25px;
+      border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      max-height: 95vh; overflow-y: auto; position: relative;
+    }
+
+    .preview-actions {
+      display: flex; gap: 12px; margin-top: 25px;
+    }
+    .preview-btn {
+      flex: 1; padding: 14px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer;
+      text-transform: uppercase; font-family: var(--font-sans); transition: 0.2s;
+    }
+    .preview-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .preview-print-btn { background: #22c55e; color: #fff; }
+    .preview-cancel-btn { background: #ef4444; color: #fff; }
+
+    #receipt-print-section {
+       width: 100%;
+       font-family: 'Courier New', Courier, monospace;
+       background: white;
+       color: black;
+       padding: 10px;
+    }
+
+    .receipt-center { text-align: center; }
+    .receipt-bold { font-weight: bold; }
+    .receipt-large { font-size: 16pt; }
+    .receipt-medium { font-size: 13pt; }
+    .receipt-small { font-size: 9pt; }
+    .receipt-divider { margin: 10px 0; border-top: 1px dashed #000; }
+    
+    .receipt-info-grid { font-size: 10pt; line-height: 1.4; margin: 10px 0; }
+    .receipt-info-row { display: flex; justify-content: space-between; }
+    
+    .receipt-item-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 11pt; }
+    .receipt-total-row { display: flex; justify-content: space-between; font-size: 14pt; margin: 5px 0; }
+    .receipt-footer-msg { margin-top: 20px; font-size: 10pt; font-style: italic; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #receipt-print-section, #receipt-print-section * { visibility: visible; }
+      #receipt-preview-modal { background: none; backdrop-filter: none; position: absolute; left: 0; top: 0; }
+      .preview-modal-content { box-shadow: none; padding: 0; width: 80mm; background: white; margin: 0; }
+      .preview-actions { display: none; }
+      #receipt-print-section { padding: 5mm; width: 70mm; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Overlay -->
+  <div id="loginOverlay" style="position:fixed; inset:0; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div class="modal" style="width:100%; max-width:400px; text-align:center; box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);">
+      <h2 style="color:var(--gold); margin-bottom:20px; font-family:'Playfair Display', serif;">ADMIN LOGIN</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <input type="password" id="loginPassword" placeholder="Enter Admin Password" required style="text-align:center; font-size:1.1rem; padding:15px; width: 100%;">
+        </div>
+        <button type="submit" class="btn" style="width:100%; margin-top:10px; justify-content:center;">UNLOCK DASHBOARD</button>
+        <p id="loginError" style="color:#ef4444; font-size:0.8rem; margin-top:10px; display:none;">Invalid password. Please try again.</p>
+      </form>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="brand">TRUFFLES</div>
+    <ul class="nav-links">
+      <li class="nav-item active" data-view="dishes">
+        <span class="material-icons-round">restaurant</span>
+        Menu Items
+      </li>
+      <li class="nav-item" data-view="orders">
+        <span class="material-icons-round">shopping_bag</span>
+        Orders
+      </li>
+      <li class="nav-item" data-view="categories">
+        <span class="material-icons-round">segment</span>
+        Categories
+      </li>
+      <li class="nav-item" data-view="chef">
+        <span class="material-icons-round">star</span>
+        Chef's Special
+      </li>
+      <li class="nav-item" style="margin-top:auto; color: var(--text-secondary);" id="logoutTrigger" onclick="toggleLogoutOption()">
+        <span class="material-icons-round">logout</span>
+        Logout
+        <span class="material-icons-round" style="margin-left:auto; font-size:18px;" id="logoutIcon">expand_more</span>
+      </li>
+      <li id="logoutAccountOption" style="display:none; padding:10px 16px 10px 48px; color:#ef4444; border-radius:10px; cursor:pointer; transition:0.3s; font-size:0.9rem; align-items:center; gap:8px;" onclick="sessionStorage.removeItem('adminToken'); localStorage.removeItem('adminToken'); window.location.reload();">
+        Logout Account
+      </li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <div id="dishesView">
+      <div class="header">
+        <h1>Menu Management</h1>
+        <button class="btn" id="addDishBtn">
+          <span class="material-icons-round">add</span> Add New Dish
+        </button>
+      </div>
+
+      <div style="margin-bottom: 18px; position: relative;">
+        <span class="material-icons-round" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); pointer-events:none; font-size:20px;">search</span>
+        <input type="text" id="dishSearchInput" placeholder="Search by name or category..." style="width:100%; padding:12px 16px 12px 44px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; color:var(--text-primary); font-size:0.95rem; outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="dishesTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="ordersView" style="display: none;">
+      <div class="header">
+        <h1>Recent Orders</h1>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Table</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="categoriesView" style="display: none;">
+      <div class="header">
+        <h1>Categories Management</h1>
+        <button class="btn" id="addCatBtn">
+          <span class="material-icons-round">add</span> Add New Category
+        </button>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>ID</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="catsTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="chefView" style="display: none;">
+      <div class="header">
+        <h1>Chef's Special Manager</h1>
+        <button class="btn" id="addChefItemBtn">
+          <span class="material-icons-round">add</span> Add New Dish
+        </button>
+      </div>
+
+      <div class="table-container" style="padding: 20px; margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <label style="font-size: 1.1rem; color: var(--gold); font-weight: 700;">Enable Chef's Special Section</label>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Toggle visibility of the chef's special slider on the home page.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chefEnabled">
+              <span class="slider round"></span>
+            </label>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Tax</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="chefTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="dishModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Dish</h3>
+        <span class="material-icons-round close-modal" id="closeModal">close</span>
+      </div>
+      <form id="dishForm">
+        <input type="hidden" id="dishId">
+        <div class="form-group">
+          <label>Dish Name</label>
+          <input type="text" id="dishName" required placeholder="e.g. White Truffle Pizza">
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 2;">
+            <label>Category</label>
+            <select id="dishCategory">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>Type</label>
+            <select id="dishType" style="background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; padding: 12px; color: var(--text-primary); outline: none; width: 100%;">
+              <option value="veg">🟢 Veg</option>
+              <option value="non-veg">🔴 Non-Veg</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 1;">
+            <label>Price ($)</label>
+            <input type="number" id="dishPrice" step="0.01" required placeholder="0.00">
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>Tax (%)</label>
+            <input type="number" id="dishTax" step="0.1" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Dish Image</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div id="imagePreview" style="width: 50px; height: 50px; border-radius: 8px; border: 1.5px dashed var(--border); overflow: hidden; background: center/cover no-repeat;"></div>
+            <div style="flex: 1;">
+              <input type="file" id="dishFileInput" accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-outline" style="width: 100%; border: 1px dashed var(--gold); background: transparent;" onclick="document.getElementById('dishFileInput').click()">UPLOAD IMAGE</button>
+            </div>
+            <input type="text" id="dishImage" placeholder="Or enter URL" style="flex: 1; padding: 10px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); color: white;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ingredients (comma separated)</label>
+          <textarea id="dishIngredients" rows="2" placeholder="Flour, Cheese, Truffles..."></textarea>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">SAVE DISH</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div class="modal-overlay" id="catModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="catModalTitle">Add New Category</h3>
+        <span class="material-icons-round close-modal" id="closeCatModal">close</span>
+      </div>
+      <form id="catForm">
+        <input type="hidden" id="catId">
+        <div class="form-group">
+          <label>Category Name</label>
+          <input type="text" id="catName" required placeholder="e.g. Seafood">
+        </div>
+        <div class="form-group">
+          <label>Icon (Material Icon Name)</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="catIcon" required placeholder="e.g. lunch_dining" style="flex: 1;">
+            <button type="button" class="btn btn-outline" style="font-size: 0.8rem; padding: 10px;" onclick="openIconPicker()">SELECT ICON</button>
+          </div>
+          <span style="font-size: 0.7rem; color: var(--text-secondary);">Browse at fonts.google.com/icons</span>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">SAVE CATEGORY</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Icon Picker Modal -->
+  <div class="modal-overlay" id="iconPickerModal">
+    <div class="modal" style="width: 480px;">
+      <div class="modal-header">
+        <h3>Select Category Icon</h3>
+        <span class="material-icons-round close-modal" id="closeIconPicker">close</span>
+      </div>
+      <input id="iconSearch" type="text" placeholder="🔍 Search icons (e.g. 'salad', 'juice', 'rice')..." style="width:100%; padding:10px 12px; border-radius:8px; background:var(--bg-primary); border:1px solid var(--border); color:var(--text-primary); margin-bottom:10px; outline:none;">
+      <div class="icon-grid" id="iconGrid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-height: 340px; overflow-y: auto; padding: 5px 2px;">
+        <!-- Icons populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Chef Special Dish Modal -->
+  <div class="modal-overlay" id="chefModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="chefModalTitle">Add Chef's Special</h3>
+        <span class="material-icons-round close-modal" id="closeChefModal">close</span>
+      </div>
+      <form id="chefItemForm">
+        <input type="hidden" id="chefItemId">
+        <div class="form-group">
+          <label>Dish Name</label>
+          <input type="text" id="chefItemName" required placeholder="e.g. White Truffle Pizza">
+        </div>
+        <div class="form-group">
+          <label>Description (Tagline/Ingredients)</label>
+          <input type="text" id="chefItemDesc" required placeholder="e.g. Wood-fired with Alba truffles & burrata">
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 1;">
+            <label>Price ($) (Optional)</label>
+            <input type="number" id="chefItemPrice" step="0.01" placeholder="0.00">
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>Tax (%)</label>
+            <input type="number" id="chefItemTax" step="0.1" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Dish Image</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div id="chefImagePreview" style="width: 50px; height: 50px; border-radius: 8px; border: 1.5px dashed var(--border); overflow: hidden; background: center/cover no-repeat;"></div>
+            <div style="flex: 1;">
+              <input type="file" id="chefFileInput" accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-outline" style="width: 100%; border: 1px dashed var(--gold); background: transparent;" onclick="document.getElementById('chefFileInput').click()">UPLOAD</button>
+            </div>
+            <input type="text" id="chefImage" placeholder="Or enter URL" style="flex: 2; padding: 12px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); color: white;">
+          </div>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">SAVE DISH</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Receipt Print Preview Modal -->
+  <div id="receipt-preview-modal">
+    <div class="preview-modal-content">
+      <div id="receipt-print-section">
+        <!-- Header -->
+        <div class="receipt-center">
+          <div class="receipt-bold receipt-large">TRUFFLES</div>
+          <div class="receipt-small">Gulberg II, Lahore, Pakistan</div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <!-- Order Info -->
+        <div class="receipt-info-grid">
+          <div class="receipt-info-row"><span>Date:</span><span id="p-date" class="receipt-bold"></span></div>
+          <div class="receipt-info-row"><span>Time:</span><span id="p-time" class="receipt-bold"></span></div>
+          <div class="receipt-info-row"><span>Order #:</span><span id="p-order-id" class="receipt-bold"></span></div>
+          <div class="receipt-info-row"><span>Customer:</span><span id="p-customer" class="receipt-bold"></span></div>
+          <div class="receipt-info-row"><span>Phone:</span><span id="p-phone" class="receipt-bold"></span></div>
+          <div class="receipt-info-row"><span>Table:</span><span id="p-table" class="receipt-bold"></span></div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <!-- Items -->
+        <div id="p-items-container">
+          <!-- Items populated by JS -->
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <!-- Tax & Total -->
+        <div class="receipt-info-row">
+          <span>Tax Amount</span>
+          <span id="p-tax" class="receipt-bold"></span>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <div class="receipt-total-row">
+          <span class="receipt-bold">TOTAL AMOUNT</span>
+          <span id="p-total" class="receipt-bold"></span>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <!-- Footer -->
+        <div class="receipt-center receipt-footer-msg">
+          <div class="receipt-bold">Thank you for your order!</div>
+          <div>We hope to serve you again</div>
+          <div class="receipt-small" style="margin-top:10px; opacity:0.8;">Powered by Truffles Digital Menu</div>
+        </div>
+      </div>
+
+      <div class="preview-actions">
+        <button class="preview-btn preview-cancel-btn" id="cancelPrintBtn">CANCEL</button>
+        <button class="preview-btn preview-print-btn" id="confirmPrintBtn">PRINT RECEIPT</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="/admin-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "all",
+    "name": "ALL",
+    "icon": "restaurant_menu"
+  },
+  {
+    "name": "STARTERS",
+    "icon": "restaurant",
+    "id": "cold_beveragescold_beverages"
+  },
+  {
+    "name": "BURGURES",
+    "icon": "lunch_dining",
+    "id": "starters"
+  },
+  {
+    "name": "PIZZA",
+    "icon": "local_pizza",
+    "id": "salads"
+  },
+  {
+    "name": "SOUP",
+    "icon": "soup_kitchen",
+    "id": "soup"
+  },
+  {
+    "name": "PASTA & NOODLES",
+    "icon": "ramen_dining",
+    "id": "pasta_&_noodles"
+  },
+  {
+    "name": "STEAKS",
+    "icon": "egg_alt",
+    "id": "steaks"
+  },
+  {
+    "name": "SEA FOOD",
+    "icon": "set_meal",
+    "id": "sea_food"
+  },
+  {
+    "name": "SALADS",
+    "icon": "grass",
+    "id": "pizza"
+  },
+  {
+    "name": "DRINKS",
+    "icon": "local_bar",
+    "id": "burgers"
+  }
+]

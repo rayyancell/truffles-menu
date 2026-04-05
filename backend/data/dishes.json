@@ -1,0 +1,393 @@
+[
+  {
+    "id": 1775386632314,
+    "name": "Nachos with Cheese & Salsa",
+    "category": "cold_beveragescold_beverages",
+    "price": 3.5535714285714284,
+    "tax": 0,
+    "image": "https://image.freepik.com/free-photo/nachos-loaded-with-salsa-cheese-jalapeno_214995-7279.jpg",
+    "ingredients": [
+      "Crispy nachos baked with cheese \ntopped with salsa sauce & jalapenos"
+    ],
+    "type": "veg"
+  },
+  {
+    "id": 1775386969522,
+    "name": "Prawns Tempura",
+    "category": "cold_beveragescold_beverages",
+    "type": "non-veg",
+    "price": 5.696428571428571,
+    "tax": 0,
+    "image": "https://twosleevers.com/wp-content/uploads/2023/03/Shrimp-Tempura-1.png",
+    "ingredients": [
+      "Battered fried prawns served \nwith tempura sauce"
+    ]
+  },
+  {
+    "id": 1775387005504,
+    "name": "Chili & garlic Prawns",
+    "category": "cold_beveragescold_beverages",
+    "type": "non-veg",
+    "price": 5.696428571428571,
+    "tax": 0,
+    "image": "https://tse4.mm.bing.net/th/id/OIP.3_NfjNEGXPXf_sY09f22hgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Sautéed in chili & garlic with \nfresh lemon & herbs"
+    ]
+  },
+  {
+    "id": 1775387031932,
+    "name": "Buffalo wings",
+    "category": "cold_beveragescold_beverages",
+    "type": "non-veg",
+    "price": 3.5535714285714284,
+    "tax": 0,
+    "image": "https://natashaskitchen.com/wp-content/uploads/2022/02/Buffalo-Wings-SQ.jpg",
+    "ingredients": [
+      "Enhanced with buffalo hot sauce\nserved with sour dressing"
+    ]
+  },
+  {
+    "id": 1775387066748,
+    "name": "Crispy finger Chicken",
+    "category": "cold_beveragescold_beverages",
+    "type": "non-veg",
+    "price": 3.5535714285714284,
+    "tax": 0,
+    "image": "https://th.bing.com/th/id/R.b9ad59016600a1e60ff84d2e52b050e6?rik=iJU7uJ61pGqoWQ&pid=ImgRaw&r=0",
+    "ingredients": [
+      "Served with honey mayo dressing"
+    ]
+  },
+  {
+    "id": 1775387091137,
+    "name": "Stuffed Baked Mushroom",
+    "category": "cold_beveragescold_beverages",
+    "type": "veg",
+    "price": 3.5535714285714284,
+    "tax": 0,
+    "image": "https://tse3.mm.bing.net/th/id/OIP.zLJ2Ny2-vzPV4keB4UnGKAHaKX?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Stuffed with butter & herbs \ntopped with parmesan"
+    ]
+  },
+  {
+    "id": 1775387114490,
+    "name": "Basket of Fries",
+    "category": "cold_beveragescold_beverages",
+    "type": "veg",
+    "price": 2.125,
+    "tax": 0,
+    "image": "https://img.freepik.com/premium-photo/fried-french-fries-foodphoto_910656-397.jpg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775387592308,
+    "name": "Crispy Chicken Burger",
+    "category": "starters",
+    "type": "non-veg",
+    "price": 4.267857142857143,
+    "tax": 0,
+    "image": "https://assets.unileversolutions.com/recipes-v2/243652.jpg",
+    "ingredients": [
+      "Crispy fried chicken with lettuce",
+      "mayo & cheese"
+    ]
+  },
+  {
+    "id": 1775387636810,
+    "name": "Chicken Cheese & Jalapeños Burger",
+    "category": "starters",
+    "type": "non-veg",
+    "price": 4.625,
+    "tax": 0,
+    "image": "https://tse2.mm.bing.net/th/id/OIP.IdleQ0hFLzDC-05TzAVQNAHaEJ?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Shredded chicken with jalapenos",
+      "onion",
+      "capsicum\n& cheese served with coleslaw & French fries"
+    ]
+  },
+  {
+    "id": 1775387668340,
+    "name": "Hamburger",
+    "category": "starters",
+    "type": "non-veg",
+    "price": 5.339285714285714,
+    "tax": 0,
+    "image": "https://tse1.mm.bing.net/th/id/OIP.Ba0AfKgyBy0NpqDN7wMNyAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Chef special house recipe",
+      "served with coleslaw\n& French fries"
+    ]
+  },
+  {
+    "id": 1775388263798,
+    "name": "Chicken Fajita",
+    "category": "salads",
+    "type": "non-veg",
+    "price": 5.696428571428571,
+    "tax": 0,
+    "image": "https://static.tossdown.com/images/193eae76027ce6aa60d5efc27c83f945.jpeg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775388652713,
+    "name": "Pizza Margarita",
+    "category": "salads",
+    "type": "veg",
+    "price": 4.982142857142857,
+    "tax": 0,
+    "image": "https://thumbs.dreamstime.com/b/pizza-margarita-margherita-cherry-tomatoes-tomato-sauce-green-basil-mozzarella-traditional-italian-whole-yeasted-337317078.jpg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775388678819,
+    "name": "Some Thing Meaty",
+    "category": "salads",
+    "type": "veg",
+    "price": 5.339285714285714,
+    "tax": 0,
+    "image": "https://content.api.news/v3/images/bin/69d0ad54d3212378101e772c0018059d",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775389758464,
+    "name": "Tomato & Basil Soup",
+    "category": "soup",
+    "type": "veg",
+    "price": 2.125,
+    "tax": 0,
+    "image": "https://garlicsaltandlime.com/wp-content/uploads/2022/09/Creamy-tomato-basil-soup-1.jpg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775389780807,
+    "name": "Chili & Corn Soup",
+    "category": "soup",
+    "type": "veg",
+    "price": 2.125,
+    "tax": 0,
+    "image": "https://secretcopycatrestaurantrecipes.com/wp-content/uploads/2021/06/Chilis-Sweet-Corn-Soup-Recipe-768x768.jpg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775389831942,
+    "name": "Hot & Sour Soup ",
+    "category": "soup",
+    "type": "veg",
+    "price": 1.7678571428571428,
+    "tax": 0,
+    "image": "https://christieathome.com/wp-content/uploads/2023/10/Hot-and-Sour-Soup14.jpg",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775389881549,
+    "name": "Soup of the day",
+    "category": "soup",
+    "type": "veg",
+    "price": 2.482142857142857,
+    "tax": 0,
+    "image": "https://tse2.mm.bing.net/th/id/OIP.IK5c5pxG4ljn_T2gWCIHFgHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      ""
+    ]
+  },
+  {
+    "id": 1775390067947,
+    "name": "Spicy Fettuccine Alfredo",
+    "category": "pasta_&_noodles",
+    "type": "veg",
+    "price": 5.339285714285714,
+    "tax": 0,
+    "image": "https://www.thespeckledpalate.com/wp-content/uploads/2022/09/The-Speckled-Palate-Green-Chile-Fettuccine-Alfredo-Picture-768x1152.jpg",
+    "ingredients": [
+      "Fettuccine pasta tossed in spicy \ncreamy sauce with chicken"
+    ]
+  },
+  {
+    "id": 1775391648220,
+    "name": "Classic Chicken Lasagna",
+    "category": "pasta_&_noodles",
+    "type": "veg",
+    "price": 5.339285714285714,
+    "tax": 0,
+    "image": "https://tse1.mm.bing.net/th/id/OIP.B2wv-KQ4vdCJTVH2qnVCnwHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Freshly baked with parmesan \ncheese & herbs with chicken"
+    ]
+  },
+  {
+    "id": 1775392071793,
+    "name": "Chicken Chow Mien",
+    "category": "pasta_&_noodles",
+    "type": "veg",
+    "price": 4.982142857142857,
+    "tax": 0,
+    "image": "https://mymorningmocha.com/wp-content/uploads/2022/11/Homemade-chow-mein-with-this-Chinese-style-UK-recipe.jpg",
+    "ingredients": [
+      "Stir fry noodles with vegetables\n& chicken"
+    ]
+  },
+  {
+    "id": 1775392143772,
+    "name": "Provencal Linguine",
+    "category": "pasta_&_noodles",
+    "type": "veg",
+    "price": 5.696428571428571,
+    "tax": 0,
+    "image": "https://th.bing.com/th/id/R.1fd05e7cd7c2eb4e24659e8364796a06?rik=Bgy%2bksyauDAIMw&pid=ImgRaw&r=0",
+    "ingredients": [
+      "Prawns in rose cream sauce with\nparmesan & basil"
+    ]
+  },
+  {
+    "id": 1775392438904,
+    "name": " Beef Steak",
+    "category": "steaks",
+    "type": "veg",
+    "price": 9.267857142857142,
+    "tax": 0,
+    "image": "https://images-gmi-pmc.edge-generalmills.com/b57ee35f-bce2-4229-8bf5-19b97876a4cb.jpg",
+    "ingredients": [
+      "Grilled beef steak with Chef special sauce \nserved with gratin potatoes & sautéed vegetables"
+    ]
+  },
+  {
+    "id": 1775392525643,
+    "name": "T-Bone steak",
+    "category": "steaks",
+    "type": "veg",
+    "price": 9.625,
+    "tax": 0,
+    "image": "https://malenyblackangusbeef.com.au/wp-content/uploads/grilled-porterhouse-beef-steak-sliced-t-bone-2022-02-01-01-57-25-utc.jpg",
+    "ingredients": [
+      "Local T-bone with two sauces",
+      "served with \nsautéed vegetables & rosemary potatoes"
+    ]
+  },
+  {
+    "id": 1775392598759,
+    "name": "Beef Steak with Black Pepper Sauce",
+    "category": "steaks",
+    "type": "veg",
+    "price": 8.910714285714286,
+    "tax": 0,
+    "image": "https://saucechick.s3.amazonaws.com/wp-content/uploads/2023/10/11045638/Devils-Steak-Sauce.png",
+    "ingredients": [
+      "Marinated grilled beef steak with black \npepper sauce served sautéed vegetables \n& mash potatoes"
+    ]
+  },
+  {
+    "id": 1775392676173,
+    "name": "Beef Steak with Mushroom Sauce",
+    "category": "steaks",
+    "type": "veg",
+    "price": 8.910714285714286,
+    "tax": 0,
+    "image": "https://www.lecremedelacrumb.com/wp-content/uploads/2021/01/steak-mushroom-sauce-1sm-8.jpg",
+    "ingredients": [
+      "Beef steak topped with creamy mushroom\nsauce served with sautéed vegetables & French fries"
+    ]
+  },
+  {
+    "id": 1775392790807,
+    "name": "Fish Mediterranean",
+    "category": "sea_food",
+    "type": "veg",
+    "price": 6.767857142857143,
+    "tax": 0,
+    "image": "https://tse2.mm.bing.net/th/id/OIP.xPifNKb8-CXIsWCnXDslywHaLG?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Pan seared fish with smooth creamy lime\nsauce served with sautéed vegetables & gratin potatoes"
+    ]
+  },
+  {
+    "id": 1775392858557,
+    "name": "Thai Sweet & Spicy Fish ",
+    "category": "sea_food",
+    "type": "veg",
+    "price": 6.767857142857143,
+    "tax": 0,
+    "image": "https://tse1.mm.bing.net/th/id/OIP.vRXZ_wz2MYIzsKA7MczbjgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Baked fish with vegetables cooked in Thai\nsweet & spicy sauce served with steamed rice"
+    ]
+  },
+  {
+    "id": 1775392938038,
+    "name": "Fish & chips",
+    "category": "sea_food",
+    "type": "veg",
+    "price": 6.767857142857143,
+    "tax": 0,
+    "image": "https://i.pinimg.com/originals/0d/05/ea/0d05ea5cb352ba881067605fc234832c.jpg",
+    "ingredients": [
+      "Crumbed fried fish served with French fries & tartar sauce"
+    ]
+  },
+  {
+    "id": 1775393010211,
+    "name": "Grilled Jumbo Prawns",
+    "category": "sea_food",
+    "type": "veg",
+    "price": 10.339285714285714,
+    "tax": 0,
+    "image": "https://en.petitchef.com/imgupl/recipe/grilled-jumbo-prawns--136279p204979.jpg",
+    "ingredients": [
+      "Char grilled prawns topped with herbs \nbutter sauce served with garlic rice"
+    ]
+  },
+  {
+    "id": 1775393103125,
+    "name": "Thai Chicken Salad",
+    "category": "pizza",
+    "type": "veg",
+    "price": 3.9107142857142856,
+    "tax": 0,
+    "image": "https://strecipes.com/wp-content/uploads/2025/04/Thai-Chicken-Salad_3-1.webp",
+    "ingredients": [
+      "Iceberg with fresh vegetables & \nchicken tossed in sweet & spicy dressing"
+    ]
+  },
+  {
+    "id": 1775393175491,
+    "name": "Caesar Salad",
+    "category": "pizza",
+    "type": "veg",
+    "price": 3.9107142857142856,
+    "tax": 0,
+    "image": "https://cdn.loveandlemons.com/wp-content/uploads/2024/12/caesar-salad-recipe.jpg",
+    "ingredients": [
+      "Lettuce tossed in Caesar dressing topped\nwith grilled chicken & sundried tomatoes"
+    ]
+  },
+  {
+    "id": 1775393230887,
+    "name": "Farmhouse Salad",
+    "category": "pizza",
+    "type": "veg",
+    "price": 4.267857142857143,
+    "tax": 0,
+    "image": "https://tse3.mm.bing.net/th/id/OIP.3CB4m7dp7T3PdEQDa24JdwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "ingredients": [
+      "Apple",
+      "cranberries",
+      "fresh greens with \nbalsamic dressing"
+    ]
+  }
+]

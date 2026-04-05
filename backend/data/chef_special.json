@@ -1,0 +1,21 @@
+{
+  "isEnabled": false,
+  "items": [
+    {
+      "id": "1775392247580",
+      "name": "Hamburger",
+      "description": "Chef special house recipe, served with coleslaw & French fries ",
+      "price": 5.339285714285714,
+      "tax": 0,
+      "image": "https://tse1.mm.bing.net/th/id/OIP.Ba0AfKgyBy0NpqDN7wMNyAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "1775394051879",
+      "name": " Beef Steak ",
+      "description": "Grilled beef steak with Chef special sauce  served with gratin potatoes & sautéed vegetables",
+      "price": 9.267857142857142,
+      "tax": 0,
+      "image": "https://images-gmi-pmc.edge-generalmills.com/b57ee35f-bce2-4229-8bf5-19b97876a4cb.jpg"
+    }
+  ]
+}
